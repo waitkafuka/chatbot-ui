@@ -2,14 +2,8 @@ import { Message, OpenAIModel } from "@/types";
 import { createParser, ParsedEvent, ReconnectInterval } from "eventsource-parser";
 
 export const OpenAIStream = async (model: OpenAIModel, systemPrompt: string, key: string, messages: Message[]) => {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
-    },
-    method: "POST",
-    body: JSON.stringify({
-      model: model.id,
+  const params = {
+    model: 'gpt-3.5-turbo',
       messages: [
         {
           role: "system",
@@ -20,7 +14,16 @@ export const OpenAIStream = async (model: OpenAIModel, systemPrompt: string, key
       max_tokens: 1000,
       temperature: 1,
       stream: true
-    })
+  }
+  console.log('请求参数：',params);
+  
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`
+    },
+    method: "POST",
+    body: JSON.stringify(params)
   });
 
   if (res.status !== 200) {

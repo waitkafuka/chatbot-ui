@@ -31,6 +31,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   const [currentMessage, setCurrentMessage] = useState<Message>();
   //页面初次进入，第一次历史会话被set之后
   const [firstConversationsSeted, setFirstConversationsSeted] = useState<boolean>(false);
+
   const stopConversationRef = useRef<boolean>(false);
 
   const handleSend = async (message: Message, deleteCount = 0) => {
@@ -284,8 +285,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
 
     const newConversation: Conversation = {
       id: lastConversation ? lastConversation.id + 1 : 1,
-      name: `New Chat`,
-      // name: `Conversation ${lastConversation ? lastConversation.id + 1 : 1}`,
+      name: `Conversation ${lastConversation ? lastConversation.id + 1 : 1}`,
       messages: [],
       model: OpenAIModels[OpenAIModelID.GPT_3_5],
       prompt: DEFAULT_SYSTEM_PROMPT,
@@ -397,37 +397,18 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   //   }
   // }, [apiKey]);
 
-  useEffect(() => {
-    console.log('firstConversationsSeted:', firstConversationsSeted);
-    if (firstConversationsSeted) {
-      //首次进入系统，没有会话，创建新的会话
-      if (!conversations || conversations.length === 0) {
-        handleNewConversation();
-      } else {
-        //之后进入系统，取出最后一个会话，判断会话是否有内容，如果没有，不再创建新的会话
-        const lastConversation = conversations[conversations.length - 1]
-        if (!lastConversation.messages || lastConversation.messages.length === 0) {
-          setSelectedConversation(lastConversation);
-        } else {
-          handleNewConversation()
-        }
-      }
-    }
-  }, [firstConversationsSeted])
+  // useEffect(() => {
+  //   if (firstConversationsSeted) {
+  //     console.log('初次进入，新建会话');
+  //     handleNewConversation();
+  //   }
+  // }, [firstConversationsSeted]);
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
     if (theme) {
       setLightMode(theme as "dark" | "light");
     }
-
-    // const apiKey = localStorage.getItem("apiKey");
-    // if (apiKey) {
-    //   setApiKey(apiKey);
-    //   fetchModels(apiKey);
-    // } else if (serverSideApiKeyIsSet) {
-    //   fetchModels("");
-    // }
 
     if (window.innerWidth < 640) {
       setShowSidebar(false);
@@ -444,9 +425,10 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
       const cleanedConversationHistory = cleanConversationHistory(parsedConversationHistory);
       setConversations(cleanedConversationHistory);
     }
-    setFirstConversationsSeted(true);
+
 
     // const selectedConversation = localStorage.getItem("selectedConversation");
+    // debugger;
     // if (selectedConversation) {
     //   const parsedSelectedConversation: Conversation = JSON.parse(selectedConversation);
     //   const cleanedSelectedConversation = cleanSelectedConversation(parsedSelectedConversation);
@@ -461,6 +443,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
     //   folderId: 0
     // });
     // }
+    //每次刷新页面之后重新新建会话
   }, [serverSideApiKeyIsSet]);
 
   return (
