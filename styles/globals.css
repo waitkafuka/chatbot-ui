@@ -35,3 +35,23 @@ html {
 pre:has(div.codeblock) {
   padding: 0;
 }
+
+@media (max-width: 1278px) {
+  .aside {
+    display: none;
+  }
+}
+
+.chat-message-icon {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(16, 163, 127);
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  margin-top: -3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}

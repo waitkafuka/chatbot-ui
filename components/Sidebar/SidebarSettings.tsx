@@ -35,10 +35,10 @@ export const SidebarSettings: FC<Props> = ({ lightMode, apiKey, onToggleLightMod
         onClick={() => onToggleLightMode(lightMode === "light" ? "dark" : "light")}
       />
 
-      <Key
+      {/* <Key
         apiKey={apiKey}
         onApiKeyChange={onApiKeyChange}
-      />
+      /> */}
     </div>
   );
 };

@@ -89,9 +89,9 @@ export const Chat: FC<Props> = ({ conversation, models, apiKey, serverSideApiKey
             {conversation.messages.length === 0 ? (
               <>
                 <div className="flex flex-col mx-auto pt-12 space-y-10 w-[350px] sm:w-[600px]">
-                  <div className="text-4xl font-semibold text-center text-gray-800 dark:text-gray-100">{models.length === 0 ? "Loading..." : "Chatbot UI"}</div>
-
-                  {models.length > 0 && (
+                  <div  className="text-4xl font-semibold text-center text-gray-800 dark:text-gray-100" >{models.length === 0 ? "Loading..." : "ChatGPT"}</div>
+                  <div style={{fontSize: "20px"}}>I am ChatGPT, what can I help you? </div>
+                  {/* {models.length > 0 && (
                     <div className="flex flex-col h-full space-y-4 border p-4 rounded border-neutral-500">
                       <ModelSelect
                         model={conversation.model}
@@ -104,12 +104,12 @@ export const Chat: FC<Props> = ({ conversation, models, apiKey, serverSideApiKey
                         onChangePrompt={(prompt) => onUpdateConversation(conversation, { key: "prompt", value: prompt })}
                       />
                     </div>
-                  )}
+                  )} */}
                 </div>
               </>
             ) : (
               <>
-                <div className="flex justify-center py-2 text-neutral-500 bg-neutral-100 dark:bg-[#444654] dark:text-neutral-200 text-sm border border-b-neutral-300 dark:border-none">Model: {conversation.model.name}</div>
+                {/* <div className="flex justify-center py-2 text-neutral-500 bg-neutral-100 dark:bg-[#444654] dark:text-neutral-200 text-sm border border-b-neutral-300 dark:border-none">Model: {conversation.model.name}</div> */}
 
                 {conversation.messages.map((message, index) => (
                   <ChatMessage

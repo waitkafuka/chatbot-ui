@@ -1,7 +1,8 @@
 import { IconDots } from "@tabler/icons-react";
 import { FC } from "react";
+import { ChatAvatar } from "./ChatAvatar";
 
-interface Props {}
+interface Props { }
 
 export const ChatLoader: FC<Props> = () => {
   return (
@@ -10,7 +11,8 @@ export const ChatLoader: FC<Props> = () => {
       style={{ overflowWrap: "anywhere" }}
     >
       <div className="text-base gap-4 md:gap-6 md:max-w-2xl lg:max-w-2xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0 m-auto">
-        <div className="font-bold min-w-[40px]">AI:</div>
+        {/* <div className="font-bold min-w-[40px]">AI:</div> */}
+        <ChatAvatar></ChatAvatar>
         <IconDots className="animate-pulse" />
       </div>
     </div>

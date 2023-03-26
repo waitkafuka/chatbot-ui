@@ -4,6 +4,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CodeBlock } from "../Markdown/CodeBlock";
+import { ChatAvatar } from "../Chat/ChatAvatar"
 
 interface Props {
   message: Message;
@@ -60,7 +61,9 @@ export const ChatMessage: FC<Props> = ({ message, messageIndex, lightMode, onEdi
       onMouseLeave={() => setIsHovering(false)}
     >
       <div className="text-base gap-4 md:gap-6 md:max-w-2xl lg:max-w-2xl xl:max-w-3xl p-4 md:py-6 flex lg:px-0 m-auto relative">
-        <div className="font-bold min-w-[40px]">{message.role === "assistant" ? "AI:" : "You:"}</div>
+        {/* <div className="font-bold min-w-[40px]">{message.role === "assistant" ? "AI:" : "You:"}</div> */}
+
+        <ChatAvatar role={message.role}></ChatAvatar>
 
         <div className="prose dark:prose-invert mt-[-2px] w-full">
           {message.role === "user" ? (

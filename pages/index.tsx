@@ -278,6 +278,7 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
   };
 
   const handleNewConversation = () => {
+    
     const lastConversation = conversations[conversations.length - 1];
 
     const newConversation: Conversation = {
@@ -441,94 +442,95 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
     }
   }, [serverSideApiKeyIsSet]);
 
-  return (
-    <>
-      <Head>
-        <title>Chatbot UI</title>
-        <meta
-          name="description"
-          content="ChatGPT but better."
-        />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-        <link
-          rel="icon"
-          href="/favicon.ico"
-        />
-      </Head>
-      {selectedConversation && (
-        <main className={`flex flex-col h-screen w-screen text-white dark:text-white text-sm ${lightMode}`}>
-          <div className="sm:hidden w-full fixed top-0">
-            <Navbar
-              selectedConversation={selectedConversation}
-              onNewConversation={handleNewConversation}
-            />
-          </div>
+return (
+  <>
+    <Head>
+      <title>ChatGPT</title>
+      <meta
+        name="description"
+        content="ChatGPT but better."
+      />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+      />
+      <link
+        rel="icon"
+        href="/favicon.png"
+      />
+    </Head>
+    {selectedConversation && (
+      <main className={`flex flex-col h-screen w-screen text-white dark:text-white text-sm ${lightMode}`}>
+        <div className="sm:hidden w-full fixed top-0">
+          <Navbar
+            selectedConversation={selectedConversation}
+            onNewConversation={handleNewConversation}
+          />
+        </div>
 
-          <div className="flex h-full w-full pt-[48px] sm:pt-0">
-            {showSidebar ? (
-              <div>
-                <Sidebar
-                  loading={messageIsStreaming}
-                  conversations={conversations}
-                  lightMode={lightMode}
-                  selectedConversation={selectedConversation}
-                  apiKey={apiKey}
-                  folders={folders}
-                  onToggleLightMode={handleLightMode}
-                  onCreateFolder={handleCreateFolder}
-                  onDeleteFolder={handleDeleteFolder}
-                  onUpdateFolder={handleUpdateFolder}
-                  onNewConversation={handleNewConversation}
-                  onSelectConversation={handleSelectConversation}
-                  onDeleteConversation={handleDeleteConversation}
-                  onToggleSidebar={() => setShowSidebar(!showSidebar)}
-                  onUpdateConversation={handleUpdateConversation}
-                  onApiKeyChange={handleApiKeyChange}
-                  onClearConversations={handleClearConversations}
-                  onExportConversations={handleExportData}
-                  onImportConversations={handleImportConversations}
-                />
+        <div className="flex h-full w-full pt-[48px] sm:pt-0">
+          {showSidebar ? (
+            <div>
+              <Sidebar
+                loading={messageIsStreaming}
+                conversations={conversations}
+                lightMode={lightMode}
+                selectedConversation={selectedConversation}
+                apiKey={apiKey}
+                folders={folders}
+                onToggleLightMode={handleLightMode}
+                onCreateFolder={handleCreateFolder}
+                onDeleteFolder={handleDeleteFolder}
+                onUpdateFolder={handleUpdateFolder}
+                onNewConversation={handleNewConversation}
+                onSelectConversation={handleSelectConversation}
+                onDeleteConversation={handleDeleteConversation}
+                onToggleSidebar={() => setShowSidebar(!showSidebar)}
+                onUpdateConversation={handleUpdateConversation}
+                onApiKeyChange={handleApiKeyChange}
+                onClearConversations={handleClearConversations}
+                onExportConversations={handleExportData}
+                onImportConversations={handleImportConversations}
+              />
 
-                <IconArrowBarLeft
+              {/* <IconArrowBarLeft
                   className="z-50 fixed top-5 left-[270px] sm:top-0.5 sm:left-[270px] sm:text-neutral-700 dark:text-white cursor-pointer hover:text-gray-400 dark:hover:text-gray-300 h-7 w-7 sm:h-8 sm:w-8"
                   onClick={() => setShowSidebar(!showSidebar)}
-                />
+                /> */}
 
-                <div
-                  onClick={() => setShowSidebar(!showSidebar)}
-                  className="sm:hidden bg-black opacity-70 z-10 absolute top-0 left-0 h-full w-full"
-                ></div>
-              </div>
-            ) : (
-              <IconArrowBarRight
-                className="fixed text-white z-50 top-2.5 left-4 sm:top-0.5 sm:left-4 sm:text-neutral-700 dark:text-white cursor-pointer hover:text-gray-400 dark:hover:text-gray-300 h-7 w-7 sm:h-8 sm:w-8"
+              <div
                 onClick={() => setShowSidebar(!showSidebar)}
-              />
-            )}
+                className="sm:hidden bg-black opacity-70 z-10 absolute top-0 left-0 h-full w-full"
+              ></div>
+            </div>
+          ) : (
+            <></>
+            // <IconArrowBarRight
+            //   className="fixed text-white z-50 top-2.5 left-4 sm:top-0.5 sm:left-4 sm:text-neutral-700 dark:text-white cursor-pointer hover:text-gray-400 dark:hover:text-gray-300 h-7 w-7 sm:h-8 sm:w-8"
+            //   onClick={() => setShowSidebar(!showSidebar)}
+            // />
+          )}
 
-            <Chat
-              conversation={selectedConversation}
-              messageIsStreaming={messageIsStreaming}
-              apiKey={apiKey}
-              serverSideApiKeyIsSet={serverSideApiKeyIsSet}
-              modelError={modelError}
-              messageError={messageError}
-              models={models}
-              loading={loading}
-              lightMode={lightMode}
-              onSend={handleSend}
-              onUpdateConversation={handleUpdateConversation}
-              onEditMessage={handleEditMessage}
-              stopConversationRef={stopConversationRef}
-            />
-          </div>
-        </main>
-      )}
-    </>
-  );
+          <Chat
+            conversation={selectedConversation}
+            messageIsStreaming={messageIsStreaming}
+            apiKey={apiKey}
+            serverSideApiKeyIsSet={serverSideApiKeyIsSet}
+            modelError={modelError}
+            messageError={messageError}
+            models={models}
+            loading={loading}
+            lightMode={lightMode}
+            onSend={handleSend}
+            onUpdateConversation={handleUpdateConversation}
+            onEditMessage={handleEditMessage}
+            stopConversationRef={stopConversationRef}
+          />
+        </div>
+      </main>
+    )}
+  </>
+);
 };
 export default Home;
 

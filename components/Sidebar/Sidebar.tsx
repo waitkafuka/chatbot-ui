@@ -77,7 +77,7 @@ export const Sidebar: FC<Props> = ({ loading, conversations, lightMode, selected
   }, [searchTerm, conversations]);
 
   return (
-    <aside className={`h-full transition-all flex flex-none space-y-2 p-2 flex-col bg-[#202123] w-[260px] z-50 sm:relative sm:top-0 fixed top-0 bottom-0`}>
+    <aside className={`aside h-full transition-all flex flex-none space-y-2 p-2 flex-col bg-[#202123] w-[260px] z-50 sm:relative sm:top-0 fixed top-0 bottom-0`}>
       <header className="flex items-center">
         <button
           className="flex gap-3 p-3 items-center w-[190px] rounded-md hover:bg-gray-500/10 transition-colors duration-200 text-white cursor-pointer text-sm flex-shrink-0 border border-white/20"
@@ -97,11 +97,11 @@ export const Sidebar: FC<Props> = ({ loading, conversations, lightMode, selected
           <IconFolderPlus size={16} />
         </button>
 
-        <IconArrowBarLeft
+        {/* <IconArrowBarLeft
           className="ml-1 p-1 text-neutral-300 cursor-pointer hover:text-neutral-400 hidden sm:flex"
           size={32}
           onClick={onToggleSidebar}
-        />
+        /> */}
       </header>
 
       {conversations.length > 1 && (
