@@ -440,6 +440,8 @@ const Home: React.FC<HomeProps> = ({ serverSideApiKeyIsSet }) => {
         folderId: 0
       });
     }
+    //每次刷新页面之后重新新建会话
+    handleNewConversation()
   }, [serverSideApiKeyIsSet]);
 
 return (
